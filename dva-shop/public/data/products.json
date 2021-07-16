@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "sku": 1001,
+      "sku": 1018,
       "title": "Red T-Shirt",
       "description": "A Beautiful T-Shirt",
       "availableSizes": ["XS", "S", "M"],
@@ -12,7 +12,7 @@
 
     {
       "id": 2,
-      "sku": 1002,
+      "sku": 1019,
       "title": "Red Center White T-Shirt",
       "description": "A Fashion T-Shirt",
       "availableSizes": ["ML", "L", "XL", "XXL"],

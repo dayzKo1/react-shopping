@@ -1,16 +1,15 @@
-import React from "react";
+import React from 'react';
 import { connect } from "dva";
-import { Button, Row, Col, Select } from "antd";
+import { Button, Row, Col, Select, Affix} from "antd";
 import ProductCard from "../components/ProductCard";
-const { Option } = Select;
-
-@connect(({ products }) => ({
+const { Option } = Select;@connect(({ products }) => ({
   products: products.result,
   now_size: products.now_size,
 }))
 export default class ProductsList extends React.Component {
   render() {
     const { products, now_size, dispatch } = this.props;
+
     const changeSize = (size) => {
       dispatch({
         type: "products/changeSize",
@@ -34,61 +33,51 @@ export default class ProductsList extends React.Component {
       <Button
         size="large"
         onClick={() => changeSize(item)}
-        style={{}}
-        shape=""
+        style={{ marginRight: 5, color:'white' }}
+        shape="circle"
         key={key}
-        type={now_size.includes(item) ? "primary" : "default"}
+        type={now_size.includes(item) ? "primary" : "ghost"}
+
       >
         {item}
       </Button>
     ));
     return (
-      <Row>
-        <Col span={24}>
-          <div
-            style={{}}
-          >
-            <div>
-              <h3 style={{}}>
-                {products.length + " Product(s) found."}
-              </h3>
-            </div>
-            <div style={{}}>
-              <span
-                style={{}}
-              >
-                Order by
-              </span>
+      <div>
+        <Affix>
+          <Row justify="center" align="bottom" style={{ backgroundColor: '#001529', color: 'white',padding:10}}>
+
+            <Col style={{ marginRight: 30 }}>
+              <span style={{ fontWeight: 600, fontSize: 20 }}>Order by:</span>
               <Select
+                bordered={false}
                 defaultValue="default"
-                style={{}}
                 onChange={(value) => changeSort(value)}
+                loading="false"
+                style={{ color: 'white', fontWeight: 400, fontSize: 17 }}
               >
-                <Option value="default">default</Option>
-                <Option value="upper">toUpper</Option>
-                <Option value="lower">toLower</Option>
+                <Option value="default">默认排序</Option>
+                <Option value="upper">价格升序</Option>
+                <Option value="lower">价格降序</Option>
               </Select>
-            </div>
-          </div>
-        </Col>
-        <Col span={24}>
-          <div
-            style={{}}
-          >
-            <h2>Sizes:</h2>
-          </div>
-          <div
-            style={{}}
-          >
-            {sizeList}
-          </div>
-        </Col>
-        <Col span={24}>
-          <div className={{}}>
-            <ProductCard />
-          </div>
-        </Col>
-      </Row>
+            </Col>
+
+            <Col style={{ marginRight: 30 }}>
+              <span style={{ fontWeight: 600, fontSize: 20 }}>Sizes:</span>
+              {sizeList}
+            </Col>
+
+            <Col>
+              <span style={{ fontSize: 20 }}>{products.length}</span>
+              <span style={{ fontWeight: 600, fontSize: 20 }}> Product(s) found</span></Col>
+          </Row>
+        </Affix>
+
+        <Row justify="space-around" gutter="4" style={{marginLeft:160,marginRight:160}}>
+          <ProductCard />
+        </Row>
+
+      </div>
     );
   }
 }

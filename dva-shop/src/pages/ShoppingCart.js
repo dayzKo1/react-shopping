@@ -14,7 +14,7 @@ import { Button, List } from "antd";
       return (
         total +
         products.productsTotal.filter((item) => item.id === id)[0].price *
-          shopping_cart.cart_good_number[id + size]
+        shopping_cart.cart_good_number[id + size]
       );
     }, 0)
     .toFixed(2),
@@ -57,53 +57,54 @@ export default class ShoppingCart extends React.Component {
       });
     };
     return (
-      <div style={{ }}>
-        <div style={{ }}>
+      <div>
+        <div>
           <List
             itemLayout="horizontal"
-            pagination={{ defaultPageSize: "5" }}
+            pagination={{ defaultPageSize: "4" }}
             dataSource={products}
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button.Group size="small">
+                  <Button.Group>
+
                     <Button
+                      style={{ marginRight: 10 }}
+                      size="small"
                       onClick={() => minusOne(item.id, item.size)}
-                      disabled={item.goods_number === 1}
                       type="primary"
-                      size="middle"
-                      shape=""
-                      style={{}}
+                      disabled={item.goods_number === 1}
                     >
                       -
                     </Button>
                     <Button
+                      style={{ marginRight: 10 }}
+                      size="small"
                       onClick={() => addToCart(item.id, item.size)}
                       type="primary"
-                      size="middle"
-                      shape="round"
                     >
                       +
                     </Button>
-                  </Button.Group>,
-                  <Button
-                    onClick={() =>
-                      removeProduct(item.id, item.size, item.goods_number)
-                    }
-                    shape=""
-                    type="danger"
-                    size="middle"
-                  >
-                    X
-                  </Button>,
+
+                    <Button
+                      style={{ verticalAlign: 'middle' }}
+                      size="small"
+                      onClick={() => removeProduct(item.id, item.size, item.goods_number)
+                      }
+                      type="danger"
+                    >
+                      x
+                    </Button>
+
+                  </Button.Group>
                 ]}
               >
                 <List.Item.Meta
                   avatar={
                     <img
+                      style={{ height: 80 }}
                       src={"./assets/products_img/" + item.sku + "_2.jpg"}
                       alt={item.title + "_2.jpg"}
-                      style={{}}
                     />
                   }
                   title={item.title}
@@ -116,27 +117,27 @@ export default class ShoppingCart extends React.Component {
                     item.price.toFixed(2)
                   }
                 />
-                <div>件数: {item.goods_number}</div>
+                <div>Num: {item.goods_number}</div>
               </List.Item>
             )}
           />
         </div>
-        <div style={{}}>
-          <h3 style={{ textAlign: "center" }}>Subtotal: ${subtotal}</h3>
-          <Button
-            onClick={checkOut}
-            disabled={subtotal <= 0.0 || checkingOut}
-            size="large"
-            block
-          >
-            {checkingOut ? (
-              <div style={{ }}>结账中...</div>
-            ) : (
-              <div>结账</div>
-            )}
-          </Button>
-        </div>
+        <div>
+          <h3 style={{ textAlign: "center" }}>Subtotal:${subtotal}</h3>
+        <Button
+          onClick={checkOut}
+          disabled={subtotal <= 0.0 || checkingOut}
+          size="large"
+          block
+        >
+          {checkingOut ? (
+            <div>CHECKOUT...</div>
+          ) : (
+            <div>CHECKOUT</div>
+          )}
+        </Button>
       </div>
+      </div >
     );
   }
 }

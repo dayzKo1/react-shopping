@@ -15,17 +15,7 @@ const products = {
         type: "getAllProducts",
         payload: res.data.products,
       });
-
-      //方法一
       const { products } = yield select();
-      /* //方法二
-      const sort = yield select(state => state.products.sort);
-      //方法三
-      const { now_size } = yield select(_ => _.products)
-      console.log(now_size);
-      console.log(sort); */
-      // console.log(products);
-
       //没有筛选尺寸时
       if (products.now_size.length === 0) {
         yield put({
@@ -59,8 +49,8 @@ const products = {
       };
     },
     getProducts: (state, { payload, sort }) => {
-      console.log("sort:", sort);
-      console.log("payload", payload);
+      //console.log("sort:", sort);
+      //console.log("payload", payload);
       if (sort === "upper") {
         payload = payload.sort((a, b) => {
           return a.price - b.price;
@@ -70,7 +60,7 @@ const products = {
           return b.price - a.price;
         });
       }
-      console.log("payload", payload);
+      //console.log("payload", payload);
       return {
         ...state,
         result: payload,

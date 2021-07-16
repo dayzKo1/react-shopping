@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "dva";
-// import ProductsList from "../components/ProductsList";
 import ProductsList from "../pages/ProductsList";
 import ShoppingCart from "../pages/ShoppingCart";
-import { Layout, Button, Drawer, Badge, Row, Col } from "antd";
+import { Layout, Button, Drawer, Badge, Row, Col, BackTop } from "antd";
 import { createFromIconfontCN } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
   scriptUrl: [
-    "//at.alicdn.com/t/font_1788592_a5xf2bdic3u.js", // icon-shoppingcart, icon-python
+    "//at.alicdn.com/t/font_2677016_nho7t8375v.js",
   ],
 });
 @connect(({ shopping_cart }) => ({
@@ -41,50 +40,40 @@ export default class Shopping extends React.Component {
       <div>
         <Layout>
 
-          <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-            <Row>
-
-              <Col>
-
-                <IconFont type="icon-python" />
-
+          <Header>
+            <Row style={{ textAlign: 'center' }}>
+              <Col span={8}>
+                <IconFont style={{ fontSize: 50, verticalAlign: 'middle' }} type="icon-store" />
               </Col>
-
-              <Col>
-
+              <Col span={8} style={{ color: 'white', fontWeight: 600, fontSize: 30 }}>
+                ShopDva
               </Col>
-
-              <Col>
-
-              </Col>
-
-              <Col>
+              <Col span={8}>
                 <Badge count={total_goods_number} showZero>
-                  <Button size="" onClick={this.showDrawer} shape="">
-                    <IconFont type="icon-shoppingcart" />
+                  <Button size="large" onClick={this.showDrawer} shape="round">
+                    <IconFont style={{ color: 'red', fontSize: 30, verticalAlign: 'middle' }} type="icon-shoppingcart" />
                   </Button>
                 </Badge>
               </Col>
-
             </Row>
           </Header>
 
-          <Content style={{ marginTop: 80 }}>
-            <Row>
-              <Col span={20} offset={2}>
-                <ProductsList />
-              </Col>
-            </Row>
+          <Content>
+            <ProductsList />
           </Content>
 
+          <BackTop>
+          <IconFont style={{fontSize: 40 }} type="icon-dingbu" />
+          </BackTop>
+
           <Footer
-            style={{ textAlign: "center", fontWeight: 200, fontSize: 30 }}
+            style={{ textAlign: "center", fontWeight: 200, fontSize: 30, backgroundColor: '#001529' }}
           >
-            &copy;Shop By Dva
+            <span style={{ color: 'white' }}>
+              &copy;Shop By Dva
+            </span>
           </Footer>
-
         </Layout>
-
 
         <Drawer
           title="购物车"
@@ -94,7 +83,6 @@ export default class Shopping extends React.Component {
         >
           <ShoppingCart />
         </Drawer>
-
       </div>
     );
   }

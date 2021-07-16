@@ -44,7 +44,7 @@ const shopping_cart = {
     },
     //添加商品
     addToCart: (state, { payload: { id, size } }) => {
-      message.success("添加物品成功", [2]);
+      message.success("添加成功", [2]);
       const cart_total_goods =
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
@@ -55,7 +55,6 @@ const shopping_cart = {
         ...state.cart_good_number,
         [id + size]: (state.cart_good_number[id + size] || 0) + 1,
       };
-      // const total_goods_number = Math.round(state.total_goods_number) + 1;
       const total_goods_number = state.total_goods_number + 1;
       const json_cart_total_goods = JSON.stringify(cart_total_goods);
       const json_cart_good_number = JSON.stringify(cart_good_number);
@@ -71,7 +70,7 @@ const shopping_cart = {
     },
     //商品数量减一
     minusOne: (state, { payload: { id, size } }) => {
-      message.success("成功减少该商品购买数量", [2]);
+      message.success("减少成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: state.cart_good_number[id + size] - 1,
@@ -94,7 +93,7 @@ const shopping_cart = {
         }),
         1
       );
-      message.success("移除物品成功", [2]);
+      message.success("移除成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: 0,
