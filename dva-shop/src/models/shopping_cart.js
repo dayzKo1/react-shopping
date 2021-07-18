@@ -1,5 +1,5 @@
 import service_shop from "../services/service_shop";
-import { message } from "antd";
+//import { message } from "antd";
 
 const initialState = {
   cart_total_goods: [], //购物车商品
@@ -19,7 +19,7 @@ const shopping_cart = {
         type: "checkoutCompleted",
         payload: res,
       });
-      message.success("结算成功", [2]);
+      //message.success("结算成功", [2]);
       localStorage.clear();
     },
   },
@@ -44,7 +44,7 @@ const shopping_cart = {
     },
     //添加商品
     addToCart: (state, { payload: { id, size } }) => {
-      message.success("添加成功", [2]);
+      //message.success("添加成功", [2]);
       const cart_total_goods =
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
@@ -70,7 +70,7 @@ const shopping_cart = {
     },
     //商品数量减一
     minusOne: (state, { payload: { id, size } }) => {
-      message.success("减少成功", [2]);
+      //message.success("减少成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: state.cart_good_number[id + size] - 1,
@@ -93,7 +93,7 @@ const shopping_cart = {
         }),
         1
       );
-      message.success("移除成功", [2]);
+      //message.success("移除成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: 0,
