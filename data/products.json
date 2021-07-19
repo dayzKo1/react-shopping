@@ -1,0 +1,193 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "sku": 1018,
+      "title": "Red T-Shirt",
+      "description": "A Beautiful T-Shirt",
+      "availableSizes": ["XS", "S", "M"],
+      "price": 36.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 2,
+      "sku": 1019,
+      "title": "Red Center White T-Shirt",
+      "description": "A Fashion T-Shirt",
+      "availableSizes": ["ML", "L", "XL", "XXL"],
+      "price": 72.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 3,
+      "sku": 1003,
+      "title": "Crow Man T-Shirt",
+      "description": "A Fashion Crow Man",
+      "availableSizes": ["M", "ML"],
+      "price": 108.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 4,
+      "sku": 1004,
+      "title": "Demon T-Shirt",
+      "description": "A Fashion Demon",
+      "availableSizes": ["L", "XL"],
+      "price": 246.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 5,
+      "sku": 1005,
+      "title": "Colourful Cat T-Shirt",
+      "description": "A Beautiful Colourful Cat",
+      "availableSizes": ["S", "XL"],
+      "price": 66.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 6,
+      "sku": 1006,
+      "title": "Human Skeleton T-Shirt",
+      "description": "A Fashion Human Skeleton",
+      "availableSizes": ["M", "ML", "L", "XS"],
+      "price": 99.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 7,
+      "sku": 1007,
+      "title": "Monkey Man T-Shirt",
+      "description": "A Fashion Monkey Man",
+      "availableSizes": ["M", "ML", "L", "S"],
+      "price": 69.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 8,
+      "sku": 1008,
+      "title": "Prowl Man T-Shirt",
+      "description": "A Handsome Prowl Man",
+      "availableSizes": ["M", "ML", "L", "XL"],
+      "price": 199.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 9,
+      "sku": 1009,
+      "title": "Blunt Man T-Shirt",
+      "description": "A Fashion Blunt Man",
+      "availableSizes": ["M", "ML", "L", "XXL"],
+      "price": 88.80,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 10,
+      "sku": 1010,
+      "title": "Concise White T-Shirt",
+      "description": "A Beautiful Concise T-Shirt",
+      "availableSizes": ["M", "ML", "L", "XXL"],
+      "price": 99.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 11,
+      "sku": 1011,
+      "title": "Black Demon T-Shirt",
+      "description": "A Fashion Black Demo",
+      "availableSizes": ["M", "ML", "L", "XL"],
+      "price": 49.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 12,
+      "sku": 1012,
+      "title": "Blunt Man Gray T-Shirt",
+      "description": "A Fashion Blunt Gray",
+      "availableSizes": ["M", "ML", "L", "S"],
+      "price": 199.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 13,
+      "sku": 1013,
+      "title": "Many CatS T-Shirt",
+      "description": "Many Fashion Cats",
+      "availableSizes": ["M", "ML", "L", "XS"],
+      "price": 168.00,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 14,
+      "sku": 1014,
+      "title": "Blunt OO T-Shirt",
+      "description": "A Fashion Blunt OO",
+      "availableSizes": ["M", "ML", "L", "XS"],
+      "price": 59.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 15,
+      "sku": 1015,
+      "title": "Monkey Black T-Shirt",
+      "description": "A Fashion Black Monkey",
+      "availableSizes": ["M", "ML", "L", "S"],
+      "price": 119.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 16,
+      "sku": 1016,
+      "title": "Colourful Cat Gray T-Shirt",
+      "description": "A Fashion Cats Gray",
+      "availableSizes": ["M", "ML", "L", "XL"],
+      "price": 129.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 17,
+      "sku": 1017,
+      "title": "Blunt OO Black T-Shirt",
+      "description": "A Fashion Blunt Black OO",
+      "availableSizes": ["M", "ML", "L", "XXL"],
+      "price": 139.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 18,
+      "sku": 1018,
+      "title": "Skeleton Brown T-Shirt",
+      "description": "A Fashion Brown Human Skeleton",
+      "availableSizes": ["M", "ML", "L", "XS", "S"],
+      "price": 149.90,
+      "currencyFormat": "$"
+    },
+
+    {
+      "id": 19,
+      "sku": 1019,
+      "title": "Lonely Man T-Shirt",
+      "description": "A Fashion Lonely Man",
+      "availableSizes": ["M", "ML", "L", "XL", "XXL"],
+      "price": 159.90,
+      "currencyFormat": "$"
+    }
+  ]
+}
