@@ -45,8 +45,8 @@ export default class Shopping extends React.Component {
               <Col span={8}>
                 <IconFont style={{ fontSize: 50, verticalAlign: 'middle' }} type="icon-store" />
               </Col>
-              <Col span={8} style={{ color: 'white', fontWeight: 600, fontSize: 30 }}>
-                ShopDva
+              <Col span={8} style={{ color: 'white', fontWeight: 600, fontSize: 20 }}>
+                D.V.A
               </Col>
               <Col span={8}>
                 <Badge count={total_goods_number} showZero>
@@ -77,7 +77,7 @@ export default class Shopping extends React.Component {
 
         <Drawer
           title="购物车"
-          width="600"
+          width="375"
           onClose={this.closeDrawer}
           visible={this.state.visible}
         >

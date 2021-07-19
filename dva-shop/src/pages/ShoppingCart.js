@@ -66,37 +66,46 @@ export default class ShoppingCart extends React.Component {
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button.Group>
-
+                  <div>
                     <Button
-                      style={{ marginRight: 10 }}
-                      size="small"
-                      onClick={() => minusOne(item.id, item.size)}
-                      type="primary"
-                      disabled={item.goods_number === 1}
-                    >
-                      -
-                    </Button>
-                    <Button
-                      style={{ marginRight: 10 }}
-                      size="small"
-                      onClick={() => addToCart(item.id, item.size)}
-                      type="primary"
-                    >
-                      +
-                    </Button>
-
-                    <Button
-                      style={{ verticalAlign: 'middle' }}
+                      style={{ verticalAlign: 'middle',marginBottom:50}}
                       size="small"
                       onClick={() => removeProduct(item.id, item.size, item.goods_number)
                       }
                       type="danger"
+                      shape="circle"
                     >
-                      x
+                      X
                     </Button>
 
-                  </Button.Group>
+                    <div>
+
+                    </div>
+                    <Button.Group>
+                      <Button
+                        style={{ marginRight: 10, fontWeight: 900, verticalAlign: 'middle' }}
+                        size="small"
+                        onClick={() => minusOne(item.id, item.size)}
+                        type="primary"
+                        disabled={item.goods_number === 1}
+                      >
+                        -
+                      </Button>
+                      <Button
+                        style={{ marginRight: 10, fontWeight: 900, verticalAlign: 'middle' }}
+                        size="small"
+                        onClick={() => addToCart(item.id, item.size)}
+                        type="primary"
+                      >
+                        +
+                      </Button>
+
+                    </Button.Group>
+
+
+
+
+                  </div>
                 ]}
               >
                 <List.Item.Meta
@@ -124,19 +133,19 @@ export default class ShoppingCart extends React.Component {
         </div>
         <div>
           <h3 style={{ textAlign: "center" }}>Subtotal:${subtotal}</h3>
-        <Button
-          onClick={checkOut}
-          disabled={subtotal <= 0.0 || checkingOut}
-          size="large"
-          block
-        >
-          {checkingOut ? (
-            <div>CHECKOUT...</div>
-          ) : (
-            <div>CHECKOUT</div>
-          )}
-        </Button>
-      </div>
+          <Button
+            onClick={checkOut}
+            disabled={subtotal <= 0.0 || checkingOut}
+            size="large"
+            block
+          >
+            {checkingOut ? (
+              <div>CHECKOUT...</div>
+            ) : (
+              <div>CHECKOUT</div>
+            )}
+          </Button>
+        </div>
       </div >
     );
   }

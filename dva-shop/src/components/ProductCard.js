@@ -18,18 +18,18 @@ export default class ProductCard extends React.Component {
     };
     return products.map((item, key) => (
 
-      <Col style={{marginTop:40}} title={item.availableSizes}>
+      <Col style={{marginTop:40,maxWidth:500}} title={item.availableSizes}>
         <Card
           hoverable
           style={{
-            width: 350,
-            margin: 10,
-            cursor: 'default'
+            width: 300,
+            cursor: 'default',
+            marginRight:60,
+            marginLeft:60
           }}
           key={key}
           cover={
             <img
-
               style={{padding:10,backgroundColor:'#f8f8f8'}}
               alt={item.title + "_1.jpg"}
               src={"./assets/products_img/" + item.sku + "_1.jpg"}
