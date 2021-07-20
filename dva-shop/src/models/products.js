@@ -3,96 +3,117 @@ import service_shop from "../services/service_shop";
 const products = {
   namespace: "products",
   state: {
-    productsTotal: [], //全部商品
-    result: [], //存放尺寸筛选后的结果
-    now_size: [], //当前尺寸
-    sort: "default", //排序默认default
+    productsTotal: [], //全部商品
+    result: [], //存放尺寸筛选后的结果
+    now_size: "none", //尺寸默认none
+    now_sort: "default", //排序默认default
   },
   effects: {
-    *query(action, { call, put, select }) {
-      const res = yield call(service_shop.getProducts);//调用services中的方法获取Api数据
+    //初始化数据
+    * query(action, {
+      call,
+      put,
+    }) {
+      const res = yield call(service_shop.getProducts);
       yield put({
         type: "getAllProducts",
-        payload: res.data.products,
-      });//将获取的数据传递出去
-      const { products } = yield select();//将获取的数据赋给products
-      //通过now_size获取当前尺寸处理数据
-      //now_size为空,没有筛选尺寸
-      if (products.now_size.length === 0) {
-        yield put({
-          type: "getProducts",
-          payload: res.data.products,
-          sort: products.sort,
+        payload: res.data.products,//state:productsTotal[]
+      });
+      yield put({
+        type: "getProducts",
+        payload: res.data.products,//state:result[]
+      })
+      //console.log("initdata", res.data.products)
+    },
+    //更新数据
+    * sort({
+      payload
+    }, {
+      put,
+      select
+    }) {
+      //改变尺寸、排序状态
+      yield put({
+        type: "changeSort",
+        payload: payload.sort,//state:now_sort
+      })
+      yield put({
+        type: "changeSize",
+        payload: payload.size,//state:now_size
+      })
+      //console.log(payload)
+      //获取全部商品
+      const {
+        products
+      } = yield select();
+      //根据当前排序方式进行排序
+      let newResultSorted = [];
+      if (payload.sort === "upper") {
+        newResultSorted = products.productsTotal.sort((a, b) => {
+          return a.price - b.price;
+        });
+      } else if (payload.sort === "lower") {
+        newResultSorted = products.productsTotal.sort((a, b) => {
+          return b.price - a.price;
         });
       } else {
-        //now_size不为空,筛选相应尺寸
-        const result = res.data.products.filter((item) => {
-          for (let value of products.now_size.values()) {
-            if (item.availableSizes.includes(value)) {
-              return true;
-            }
-          }
-          return false;
-        });
-        yield put({
-          type: "getProducts",
-          payload: result,
-          sort: products.sort
-        })
+        newResultSorted = deepClone(products.productsTotal)
       }
-    },
+      //console.log("sorted:", newResultSorted)
+      //根据当前尺寸进行筛选
+      let newResultSized = []
+      if (products.now_size !== "none") {
+        newResultSorted.forEach(item => {
+          if (item.availableSizes.indexOf(payload.size) !== -1) {
+            newResultSized.push(item)
+          }
+        })
+      } else {
+        newResultSized = deepClone(newResultSorted)
+      }
+      //console.log("sized:", newResultSized)
+      //将筛选结果传给result
+      yield put({
+        type: "getProducts",
+        payload: newResultSized
+      })
+    }
   },
   reducers: {
-    getAllProducts: (state, { payload }) => {
+    getAllProducts: (state, {
+      payload
+    }) => {
       return {
         ...state,
         productsTotal: payload,
       };
     },
-    getProducts: (state, { payload, sort }) => {
-      //console.log("sort:", sort);
-      //console.log("payload", payload);
-      //商品排序(价格升序)
-      if (sort === "upper") {
-        payload = payload.sort((a, b) => {
-          return a.price - b.price;
-        });
-      }
-      //商品排序(价格降序)
-      else if (sort === "lower") {
-        payload = payload.sort((a, b) => {
-          return b.price - a.price;
-        });
-      }
-      //console.log("payload", payload);
+    getProducts: (state, {
+      payload
+    }) => {
       return {
         ...state,
         result: payload,
       };
     },
-    //更新尺寸状态now_size
     changeSize: (state, { payload }) => {
-      if (state.now_size[0] === payload) {
-        // state.now_size.splice(0, 1);
-        state.now_size = [];
-        return {
-          ...state,
-        };
-      }
-      state.now_size = [];
       return {
         ...state,
-        now_size: [...state.now_size, payload],
+        now_size: payload,
       };
     },
-    //更新排序类型sort
     changeSort: (state, { payload }) => {
       return {
         ...state,
-        sort: payload,
+        now_sort: payload,
       };
     },
   },
 };
-
 export default products;
+
+function deepClone(arr) {
+  let _obj = JSON.stringify(arr),
+    objClone = JSON.parse(_obj);
+  return objClone;
+}

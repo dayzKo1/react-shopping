@@ -1,13 +1,10 @@
 import service_shop from "../services/service_shop";
 import { message } from "antd";
-
 const initialState = {
-  cart_total_goods: [], //购物车商品
-  //购物车内每件商品的数量
-  cart_good_number: {},
-  total_goods_number: 0, //购物车内商品总量
+  cart_total_goods: [],  //购物车全部商品
+  cart_good_number: {},  //购物车每件商品数量
+  total_goods_number: 0, //购物车商品总量
 };
-
 const shopping_cart = {
   namespace: "shopping_cart",
   state: initialState,
@@ -19,13 +16,13 @@ const shopping_cart = {
       yield put({
         type: "checkoutCompleted",
         payload: res,
-      });//结算完成,初始化数据（置空
+      });
       message.success("结算成功", [2]);
-      localStorage.clear();//清空本地缓存
+      localStorage.clear();//清空缓存
     },
   },
   reducers: {
-    //localStorage存储数据：获取购物车当前数据,使用JSON.parse序列化数据
+    //初始化购物车：从localStorage中获取购物车当前数据, 使用JSON.parse序列化数据
     getCart: (state, { payload }) => {
       const cart_total_goods = localStorage.getItem("Cart_Total_Goods");
       const cart_good_number = localStorage.getItem("Cart_Good_Number");
@@ -43,7 +40,7 @@ const shopping_cart = {
         cart_total_goods: [],
       };
     },
-    //添加商品：从localstorage中读取数据,使用JSON.stringify反序列化数据，达到刷新保持
+    //添加商品：从localstorage中读取数据,使用JSON.stringify反序列化数据，实现刷新保持
     addToCart: (state, { payload: { id, size } }) => {
       message.success("添加成功", [2]);
       const cart_total_goods =

@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "dva";
 import { Card, Button, Popover, List, Divider, Col } from "antd";
+import styles from './ProductCard.css'
 @connect(({ products }) => ({
   products: products.result,
 }))
 export default class ProductCard extends React.Component {
   render() {
-    const { products, dispatch } = this.props;
+    const { products=[], dispatch } = this.props;
     const addToCart = (id, size) => {
       dispatch({
         type: "shopping_cart/addToCart",
@@ -18,14 +19,15 @@ export default class ProductCard extends React.Component {
     };
     return products.map((item, key) => (
 
-      <Col style={{marginTop:40,maxWidth:500}} title={item.availableSizes}>
+      <Col style={{marginTop:15,marginBottom:10}} title={item.availableSizes}>
         <Card
+          className={styles.NewCard}
           hoverable
           style={{
             width: 300,
             cursor: 'default',
-            marginRight:60,
-            marginLeft:60
+            marginRight:45,
+            marginLeft:45
           }}
           key={key}
           cover={

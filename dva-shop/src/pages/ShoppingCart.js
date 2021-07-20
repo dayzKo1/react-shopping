@@ -61,54 +61,45 @@ export default class ShoppingCart extends React.Component {
         <div>
           <List
             itemLayout="horizontal"
-            pagination={{ defaultPageSize: "4" }}
+            pagination={{ defaultPageSize: "5" }}
             dataSource={products}
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <div>
+                  <Button.Group>
                     <Button
-                      style={{ verticalAlign: 'middle',marginBottom:50}}
+                      style={{ marginRight: 10, verticalAlign: 'middle',width:24 }}
+                      size="small"
+                      onClick={() => minusOne(item.id, item.size)}
+                      type="primary"
+                      disabled={item.goods_number === 1}
+                    >
+                      -
+                    </Button>
+                    <Button
+                      style={{ marginRight: 10, verticalAlign: 'middle',width:25 }}
+                      size="small"
+                      onClick={() => addToCart(item.id, item.size)}
+                      type="primary"
+                    >
+                      +
+                    </Button>
+
+                    <Button
+                      style={{ verticalAlign: 'middle'}}
                       size="small"
                       onClick={() => removeProduct(item.id, item.size, item.goods_number)
                       }
                       type="danger"
-                      shape="circle"
                     >
                       X
                     </Button>
+                  </Button.Group>
 
-                    <div>
-
-                    </div>
-                    <Button.Group>
-                      <Button
-                        style={{ marginRight: 10, fontWeight: 900, verticalAlign: 'middle' }}
-                        size="small"
-                        onClick={() => minusOne(item.id, item.size)}
-                        type="primary"
-                        disabled={item.goods_number === 1}
-                      >
-                        -
-                      </Button>
-                      <Button
-                        style={{ marginRight: 10, fontWeight: 900, verticalAlign: 'middle' }}
-                        size="small"
-                        onClick={() => addToCart(item.id, item.size)}
-                        type="primary"
-                      >
-                        +
-                      </Button>
-
-                    </Button.Group>
-
-
-
-
-                  </div>
                 ]}
               >
                 <List.Item.Meta
+
                   avatar={
                     <img
                       style={{ height: 80 }}
@@ -116,13 +107,10 @@ export default class ShoppingCart extends React.Component {
                       alt={item.title + "_2.jpg"}
                     />
                   }
+
                   title={item.title}
                   description={
-                    item.size +
-                    " | " +
-                    item.description +
-                    " | " +
-                    item.currencyFormat +
+                    item.size + '|$'+
                     item.price.toFixed(2)
                   }
                 />
