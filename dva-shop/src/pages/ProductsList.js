@@ -20,6 +20,13 @@ export default class ProductsList extends React.Component {
   render() {
     const { products, now_size, now_sort, dispatch } = this.props;
     const changeSize = (size) => {
+      //   dispatch({
+      //     type: "products/changeSize",
+      //     payload: size,
+      //   });
+      //   dispatch({
+      //     type: "products/query",
+      //   });
       dispatch({
         type: "products/sort",
         payload: {
@@ -29,6 +36,13 @@ export default class ProductsList extends React.Component {
       })
     };
     const changeSort = (sort) => {
+      // dispatch({
+      //   type: "products/changeSort",
+      //   payload: sort,
+      // });
+      // dispatch({
+      //   type: "products/query",
+      // });
       dispatch({
         type: "products/sort",
         payload: {

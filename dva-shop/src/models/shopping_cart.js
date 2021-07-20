@@ -10,9 +10,15 @@ const shopping_cart = {
   state: initialState,
   effects: {
     //结算操作
-    *checkout(action, { call, put, select }) {
-      const { shopping_cart } = yield select();//获取当前购物车数据
-      const res = yield call(service_shop.buyProducts, shopping_cart);//调用services中的buyProducts方法
+    * checkout(action, {
+      call,
+      put,
+      select
+    }) {
+      const {
+        shopping_cart
+      } = yield select(); //获取当前购物车数据
+      const res = yield call(service_shop.buyProducts, shopping_cart); //调用services中的buyProducts方法
       yield put({
         type: "checkoutCompleted",
         payload: res,
@@ -46,9 +52,12 @@ const shopping_cart = {
       const cart_total_goods =
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
-        }) === -1
-          ? [...state.cart_total_goods, { id, size }]
-          : [...state.cart_total_goods];
+        }) === -1 ?
+        [...state.cart_total_goods, {
+          id,
+          size
+        }] :
+        [...state.cart_total_goods];
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: (state.cart_good_number[id + size] || 0) + 1,
@@ -67,7 +76,12 @@ const shopping_cart = {
       };
     },
     //商品数量减一
-    minusOne: (state, { payload: { id, size } }) => {
+    minusOne: (state, {
+      payload: {
+        id,
+        size
+      }
+    }) => {
       //message.success("减少成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
@@ -84,7 +98,13 @@ const shopping_cart = {
       };
     },
     //移除商品
-    removeProduct: (state, { payload: { id, size, goods_number } }) => {
+    removeProduct: (state, {
+      payload: {
+        id,
+        size,
+        goods_number
+      }
+    }) => {
       state.cart_total_goods.splice(
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
