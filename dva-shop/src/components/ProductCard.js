@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import { Card, Button, Popover, List, Divider, Col } from "antd";
+import styles from './ProductCard.css'
 @connect(({ products }) => ({
   products: products.result,
 }))
@@ -18,14 +19,15 @@ export default class ProductCard extends React.Component {
     };
     return products.map((item, key) => (
 
-      <Col style={{marginTop:40,maxWidth:500}} title={item.availableSizes}>
+      <Col style={{marginTop:20,marginBottom:20}} title={item.availableSizes}>
         <Card
+          className={styles.NewCard}
           hoverable
           style={{
             width: 300,
             cursor: 'default',
-            marginRight:60,
-            marginLeft:60
+            marginRight:50,
+            marginLeft:50
           }}
           key={key}
           cover={

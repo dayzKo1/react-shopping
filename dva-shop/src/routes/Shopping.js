@@ -76,8 +76,8 @@ export default class Shopping extends React.Component {
         </Layout>
 
         <Drawer
-          title="购物车"
-          width="375"
+          title="DVA购物车"
+          width="400"
           onClose={this.closeDrawer}
           visible={this.state.visible}
         >

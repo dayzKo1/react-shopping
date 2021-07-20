@@ -1,5 +1,7 @@
 import service_shop from "../services/service_shop";
-import { message } from "antd";
+import {
+  message
+} from "antd";
 
 const initialState = {
   cart_total_goods: [], //购物车商品
@@ -13,20 +15,29 @@ const shopping_cart = {
   state: initialState,
   effects: {
     //结算操作
-    *checkout(action, { call, put, select }) {
-      const { shopping_cart } = yield select();//获取当前购物车数据
-      const res = yield call(service_shop.buyProducts, shopping_cart);//调用services中的buyProducts方法
+    * checkout(action, {
+      call,
+      put,
+      select
+    }) {
+      const {
+        shopping_cart
+      } = yield select(); //获取当前购物车数据
+      const res = yield call(service_shop.buyProducts, shopping_cart); //调用services中的buyProducts方法
       yield put({
         type: "checkoutCompleted",
         payload: res,
-      });//结算完成,初始化数据（置空
+      });
+      //结算完成,初始化数据（置空
       message.success("结算成功", [2]);
-      localStorage.clear();//清空本地缓存
+      localStorage.clear(); //清空本地缓存
     },
   },
   reducers: {
     //localStorage存储数据：获取购物车当前数据,使用JSON.parse序列化数据
-    getCart: (state, { payload }) => {
+    getCart: (state, {
+      payload
+    }) => {
       const cart_total_goods = localStorage.getItem("Cart_Total_Goods");
       const cart_good_number = localStorage.getItem("Cart_Good_Number");
       const total_goods_number = localStorage.getItem("Total_Goods_Number");
@@ -44,14 +55,22 @@ const shopping_cart = {
       };
     },
     //添加商品：从localstorage中读取数据,使用JSON.stringify反序列化数据，达到刷新保持
-    addToCart: (state, { payload: { id, size } }) => {
+    addToCart: (state, {
+      payload: {
+        id,
+        size
+      }
+    }) => {
       message.success("添加成功", [2]);
       const cart_total_goods =
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
-        }) === -1
-          ? [...state.cart_total_goods, { id, size }]
-          : [...state.cart_total_goods];
+        }) === -1 ?
+        [...state.cart_total_goods, {
+          id,
+          size
+        }] :
+        [...state.cart_total_goods];
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: (state.cart_good_number[id + size] || 0) + 1,
@@ -70,7 +89,12 @@ const shopping_cart = {
       };
     },
     //商品数量减一
-    minusOne: (state, { payload: { id, size } }) => {
+    minusOne: (state, {
+      payload: {
+        id,
+        size
+      }
+    }) => {
       //message.success("减少成功", [2]);
       const cart_good_number = {
         ...state.cart_good_number,
@@ -87,7 +111,13 @@ const shopping_cart = {
       };
     },
     //移除商品
-    removeProduct: (state, { payload: { id, size, goods_number } }) => {
+    removeProduct: (state, {
+      payload: {
+        id,
+        size,
+        goods_number
+      }
+    }) => {
       state.cart_total_goods.splice(
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
