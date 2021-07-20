@@ -84,7 +84,6 @@ export default class ShoppingCart extends React.Component {
                     >
                       +
                     </Button>
-
                     <Button
                       style={{ verticalAlign: 'middle'}}
                       size="small"
@@ -95,11 +94,9 @@ export default class ShoppingCart extends React.Component {
                       X
                     </Button>
                   </Button.Group>
-
                 ]}
               >
                 <List.Item.Meta
-
                   avatar={
                     <img
                       style={{ height: 80 }}
@@ -107,7 +104,6 @@ export default class ShoppingCart extends React.Component {
                       alt={item.title + "_2.jpg"}
                     />
                   }
-
                   title={item.title}
                   description={
                     item.size + '|$'+

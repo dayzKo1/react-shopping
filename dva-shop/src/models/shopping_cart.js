@@ -48,16 +48,16 @@ const shopping_cart = {
     },
     //添加商品：从localstorage中读取数据,使用JSON.stringify反序列化数据，实现刷新保持
     addToCart: (state, { payload: { id, size } }) => {
-      message.success("添加成功", [2]);
+      //message.success("添加成功", [2]);
       const cart_total_goods =
         state.cart_total_goods.findIndex((v) => {
           return v.id === id && v.size === size;
         }) === -1 ?
-        [...state.cart_total_goods, {
-          id,
-          size
-        }] :
-        [...state.cart_total_goods];
+          [...state.cart_total_goods, {
+            id,
+            size
+          }] :
+          [...state.cart_total_goods];
       const cart_good_number = {
         ...state.cart_good_number,
         [id + size]: (state.cart_good_number[id + size] || 0) + 1,
