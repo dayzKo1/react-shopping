@@ -32,8 +32,8 @@ export default class ShoppingCart extends React.Component {
       dispatch({
         type: "shoppingCart/addToCart",
         payload: {
-          id:id,
-          size:size
+          id,
+          size,
         },
       });
     };
@@ -68,7 +68,7 @@ export default class ShoppingCart extends React.Component {
                 actions={[
                   <Button.Group>
                     <Button
-                      style={{ marginRight: 10, verticalAlign: 'middle', width: 24 }}
+                      style={{ marginRight: 10, verticalAlign: 'middle',width:24 }}
                       size="small"
                       onClick={() => minusOne(item.id, item.size)}
                       type="primary"
@@ -77,7 +77,7 @@ export default class ShoppingCart extends React.Component {
                       -
                     </Button>
                     <Button
-                      style={{ marginRight: 10, verticalAlign: 'middle', width: 25 }}
+                      style={{ marginRight: 10, verticalAlign: 'middle',width:25 }}
                       size="small"
                       onClick={() => addToCart(item.id, item.size)}
                       type="primary"
@@ -85,7 +85,7 @@ export default class ShoppingCart extends React.Component {
                       +
                     </Button>
                     <Button
-                      style={{ verticalAlign: 'middle' }}
+                      style={{ verticalAlign: 'middle'}}
                       size="small"
                       onClick={() => removeProduct(item.id, item.size, item.goods_number)
                       }
@@ -106,7 +106,7 @@ export default class ShoppingCart extends React.Component {
                   }
                   title={item.title}
                   description={
-                    item.size + '|$' +
+                    item.size + '|$'+
                     item.price.toFixed(2)
                   }
                 />

@@ -10,8 +10,8 @@ const IconFont = createFromIconfontCN({
     "//at.alicdn.com/t/font_2677016_nho7t8375v.js",
   ],
 });
-@connect(({ shopping_cart }) => ({
-  total_goods_number: shopping_cart.total_goods_number,
+@connect(({ shoppingCart }) => ({
+  total_goods_number: shoppingCart.total_goods_number,
 }))
 export default class Shopping extends React.Component {
   state = { visible: false };
@@ -28,10 +28,7 @@ export default class Shopping extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "products/query",
-    });
-    dispatch({
-      type: "shopping_cart/getCart",
+      type: "shoppingCart/getCart",
     });
   }
   render() {

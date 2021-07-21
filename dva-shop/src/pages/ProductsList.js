@@ -4,22 +4,28 @@ import { Button, Row, Col, Select, Affix } from "antd";
 import ProductCard from "../components/ProductCard";
 const { Option } = Select;
 @connect(({ products }) => ({
-  products: products.result,
-  now_size: products.now_size,
-  now_sort: products.now_sort
+  products: products.data,
+  state_size: products.size,
+  state_sort: products.sort,
 }))
 export default class ProductsList extends React.Component {
   state = {
     sizeTotal: ["XS", "S", "M", "ML", "L", "XL", "XXL"]
   }
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "products/query",
+    });
+  }
   render() {
-    const { products, now_size, now_sort, dispatch } = this.props;
+    const { products, state_size, state_sort, dispatch } = this.props;
     const changeSize = (size) => {
       dispatch({
         type: "products/sort",
         payload: {
           size: size,
-          sort: now_sort
+          sort: state_sort,
         }
       })
     };
@@ -27,9 +33,9 @@ export default class ProductsList extends React.Component {
       dispatch({
         type: "products/sort",
         payload: {
-          size: now_size,
-          sort: sort
-        }
+          size: state_size,
+          sort: sort,
+        },
       })
     };
     const { sizeTotal } = this.state;
@@ -38,7 +44,7 @@ export default class ProductsList extends React.Component {
         size="middle"
         onClick={() => changeSize(item)}
         style={{ marginRight: 5, color: 'white', backgroundColor: 'red', borderColor: 'red' }}
-        shape={now_size===item ? "round" : "circle"}
+        shape={state_size === item ? "round" : "circle"}
         key={key}
       >
         {item}

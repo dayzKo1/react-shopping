@@ -3,14 +3,14 @@ import { connect } from "dva";
 import { Card, Button, Popover, List, Divider, Col } from "antd";
 import styles from './ProductCard.css'
 @connect(({ products }) => ({
-  products: products.result,
+  products: products.data,
 }))
 export default class ProductCard extends React.Component {
   render() {
-    const { products=[], dispatch } = this.props;
+    const { products = [], dispatch } = this.props;
     const addToCart = (id, size) => {
       dispatch({
-        type: "shopping_cart/addToCart",
+        type: "shoppingCart/addToCart",
         payload: {
           id,
           size,
@@ -19,20 +19,21 @@ export default class ProductCard extends React.Component {
     };
     return products.map((item, key) => (
 
-      <Col style={{marginTop:15,marginBottom:10}} title={item.availableSizes}>
+      <Col key={key}
+        style={{ marginTop: 15, marginBottom: 10 }} title={item.availableSizes}>
         <Card
           className={styles.NewCard}
           hoverable
           style={{
             width: 300,
             cursor: 'default',
-            marginRight:45,
-            marginLeft:45
+            marginRight: 45,
+            marginLeft: 45
           }}
           key={key}
           cover={
             <img
-              style={{padding:10,backgroundColor:'#f8f8f8'}}
+              style={{ padding: 10, backgroundColor: '#f8f8f8' }}
               alt={item.title + "_1.jpg"}
               src={"./assets/products_img/" + item.sku + "_1.jpg"}
             ></img>
