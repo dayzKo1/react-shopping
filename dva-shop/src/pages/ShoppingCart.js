@@ -97,7 +97,7 @@ export default class ShoppingCart extends React.Component {
                       type="primary"
                       disabled={item.goods_number === 1}
                     >
-                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-1" />
+                      <IconFont style={{ fontSize: 10, color: 'black' }} type="icon-jiajianchengchu-1" />
                     </Button>
                     <Button
                       style={{ marginRight: 10, verticalAlign: 'middle' }}
@@ -105,7 +105,7 @@ export default class ShoppingCart extends React.Component {
                       onClick={() => this.addToCart(item.id, item.size)}
                       type="primary"
                     >
-                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-2" />
+                      <IconFont style={{ fontSize: 10, color: 'black' }} type="icon-jiajianchengchu-2" />
                     </Button>
                     <Button
                       style={{ verticalAlign: 'middle' }}
@@ -114,7 +114,7 @@ export default class ShoppingCart extends React.Component {
                       }
                       type="danger"
                     >
-                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-3" />
+                      <IconFont style={{ fontSize: 10, color: 'black' }} type="icon-jiajianchengchu-3" />
                     </Button>
                   </Button.Group>
                 ]}
