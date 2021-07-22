@@ -15,6 +15,12 @@ const IconFont = createFromIconfontCN({
 }))
 export default class Shopping extends React.Component {
   state = { visible: false };
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/getCart",
+    });
+  }
   showDrawer = () => {
     this.setState({
       visible: true,
@@ -25,12 +31,6 @@ export default class Shopping extends React.Component {
       visible: false,
     });
   };
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: "shoppingCart/getCart",
-    });
-  }
   render() {
     const { total_goods_number } = this.props;
     return (

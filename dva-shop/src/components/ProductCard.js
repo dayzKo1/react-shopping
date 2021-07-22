@@ -1,22 +1,25 @@
 import React from "react";
 import { connect } from "dva";
-import { Card, Button, Popover, List, Divider, Col } from "antd";
+import { Card, Button, Popover, List, Divider, Col ,message} from "antd";
 import styles from './ProductCard.css'
 @connect(({ products }) => ({
   products: products.data,
 }))
 export default class ProductCard extends React.Component {
+  addToCart = (id, size) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/addToCart",
+      payload: {
+        id,
+        size,
+      },
+    });
+    message.success("添加成功");
+  };
   render() {
-    const { products = [], dispatch } = this.props;
-    const addToCart = (id, size) => {
-      dispatch({
-        type: "shoppingCart/addToCart",
-        payload: {
-          id,
-          size,
-        },
-      });
-    };
+    const { products = [] } = this.props;
+
     return products.map((item, key) => (
 
       <Col key={key}
@@ -39,9 +42,9 @@ export default class ProductCard extends React.Component {
             ></img>
           }
         >
-          <h2 style={{ textAlign: "center",fontFamily: "Arial" }}>{item.title}</h2>
+          <h2 style={{ textAlign: "center", fontFamily: "Arial" }}>{item.title}</h2>
           <Divider />
-          <h3 style={{ textAlign: "center" ,fontSize:25,fontFamily: "Arial"}}>
+          <h3 style={{ textAlign: "center", fontSize: 25, fontFamily: "Arial" }}>
             {item.currencyFormat} {item.price.toFixed(2)}
           </h3>
           <Popover
@@ -53,10 +56,10 @@ export default class ProductCard extends React.Component {
                   <List.Item >
                     <Button
                       size="middle"
-                      style={{ width: '100%' ,fontFamily: "Arial"  }}
-                      onClick={() => addToCart(item.id, item_size)}
+                      style={{ width: '100%', fontFamily: "Arial" }}
+                      onClick={() => this.addToCart(item.id, item_size)}
                     >
-                      <span style={{ fontWeight:800, fontFamily: "Arial"}}>{item_size}</span>
+                      <span style={{ fontWeight: 800, fontFamily: "Arial" }}>{item_size}</span>
                     </Button>
                   </List.Item>
                 )}

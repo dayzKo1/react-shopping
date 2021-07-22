@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "dva";
 import { Button, List } from "antd";
 import { createFromIconfontCN } from "@ant-design/icons";
+import {
+  message
+} from "antd";
 const IconFont = createFromIconfontCN({
   scriptUrl: [
     "//at.alicdn.com/t/font_2677016_exz15j3jnxg.js",
@@ -27,12 +30,18 @@ const IconFont = createFromIconfontCN({
   checkingOut: loading.effects["shoppingCart/checkout"],
 }))
 export default class ShoppingCart extends React.Component {
-
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/getCart",
+    });
+  }
   checkOut = () => {
     const { dispatch } = this.props;
     dispatch({
       type: "shoppingCart/checkout",
     });
+    message.success("结算成功");
   };
   addToCart = (id, size) => {
     const { dispatch } = this.props;
@@ -88,7 +97,7 @@ export default class ShoppingCart extends React.Component {
                       type="primary"
                       disabled={item.goods_number === 1}
                     >
-                      <IconFont style={{ fontSize: 10,color:'white' }} type="icon-jiajianchengchu-1" />
+                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-1" />
                     </Button>
                     <Button
                       style={{ marginRight: 10, verticalAlign: 'middle' }}
@@ -96,7 +105,7 @@ export default class ShoppingCart extends React.Component {
                       onClick={() => this.addToCart(item.id, item.size)}
                       type="primary"
                     >
-                      <IconFont style={{ fontSize: 10,color:'white'}} type="icon-jiajianchengchu-2" />
+                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-2" />
                     </Button>
                     <Button
                       style={{ verticalAlign: 'middle' }}
@@ -105,7 +114,7 @@ export default class ShoppingCart extends React.Component {
                       }
                       type="danger"
                     >
-                      <IconFont style={{ fontSize: 10,color:'white'}} type="icon-jiajianchengchu-3" />
+                      <IconFont style={{ fontSize: 10, color: 'white' }} type="icon-jiajianchengchu-3" />
                     </Button>
                   </Button.Group>
                 ]}
@@ -128,7 +137,7 @@ export default class ShoppingCart extends React.Component {
                       }
 
                       <div>
-                        NUM:<span style={{ color: 'red',fontWeight:600 }}>{
+                        NUM:<span style={{ color: 'red', fontWeight: 600 }}>{
                           item.goods_number}</span>
                       </div>
 

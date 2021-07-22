@@ -1,7 +1,5 @@
 import serviceShop from "../services/serviceShop";
-import {
-  message
-} from "antd";
+
 const initialState = {
   cart_total_goods: [], //购物车全部商品
   cart_good_number: {}, //购物车每件商品数量
@@ -26,7 +24,7 @@ const shoppingCart = {
         type: "checkoutCompleted",
         payload: res,
       });
-      message.success("结算成功", [2]);
+
       localStorage.clear();
     },
     //购物车数据

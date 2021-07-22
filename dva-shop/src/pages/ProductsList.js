@@ -47,7 +47,7 @@ export default class ProductsList extends React.Component {
       <Button
         size="middle"
         onClick={() => this.changeSize(item)}
-        style={{ marginRight: 5, color: 'white', backgroundColor: 'red', borderColor: 'red',fontFamily: "Arial" ,fontWeight:500}}
+        style={{ marginRight: 5, color: 'white', backgroundColor: 'red', borderColor: 'red', fontFamily: "Arial", fontWeight: 500 }}
         shape={state_size === item ? "round" : "circle"}
         key={key}
       >
@@ -60,7 +60,7 @@ export default class ProductsList extends React.Component {
         <Affix>
           <Row justify="center" align="bottom" style={{ backgroundColor: '#001529', color: 'white', padding: 10 }}>
             <Col style={{ marginRight: 30 }}>
-              <span style={{ fontWeight: 600, fontSize: 20 ,fontFamily: "Arial" }}>Order:</span>
+              <span style={{ fontWeight: 600, fontSize: 20, fontFamily: "Arial" }}>Order:</span>
               <Select
                 bordered={false}
                 defaultValue="default"
@@ -79,7 +79,7 @@ export default class ProductsList extends React.Component {
             </Col>
             <Col>
               <span style={{ fontSize: 20, color: 'red' }}>{products?.length}</span>
-              <span style={{ fontWeight: 600, fontSize: 20,fontFamily: "Arial"  }}> Product(s) Found</span></Col>
+              <span style={{ fontWeight: 600, fontSize: 20, fontFamily: "Arial" }}> Product(s) Found</span></Col>
           </Row>
         </Affix>
         <Row justify="center">
