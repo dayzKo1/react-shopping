@@ -1,4 +1,4 @@
-import serviceShop from "../services/serviceShop";
+import serviceShop from "../dva-shop/src/services/serviceShop";
 import {
   message
 } from "antd";
