@@ -31,6 +31,7 @@ const shoppingCart = {
     },
     //购物车数据
     * getCart(action, {
+      select,
       call,
       put
     }) {
@@ -38,22 +39,27 @@ const shoppingCart = {
       const cart_total_goods = localStorage.getItem("Cart_Total_Goods");
       const cart_good_number = localStorage.getItem("Cart_Good_Number");
       const total_goods_number = localStorage.getItem("Total_Goods_Number");
-      // if (cart_total_goods) {
-      yield put({
-        type: "save",
-        payload: res.data.products,
-        cart_total_goods: JSON.parse(cart_total_goods),
-        cart_good_number: JSON.parse(cart_good_number),
-        total_goods_number: JSON.parse(total_goods_number),
-      })
-      // }
-      // else {
-      //   yield put({
-      //     type: "save",
-      //      payload: res.data.products,
-      //     cart_total_goods: [],
-      //   })
-      // }
+      const {
+        shoppingCart
+      } = yield select();
+      if (cart_total_goods) {
+        yield put({
+          type: "save",
+          payload: res.data.products,
+          cart_total_goods: JSON.parse(cart_total_goods),
+          cart_good_number: JSON.parse(cart_good_number),
+          total_goods_number: JSON.parse(total_goods_number),
+        })
+      }
+      else {
+        yield put({
+          type: "save",
+          payload: res.data.products,
+          cart_total_goods: [],
+          cart_good_number: shoppingCart.cart_good_number,
+          total_goods_number: shoppingCart.total_goods_number,
+        })
+      }
     },
     //增加商品
     * addToCart({

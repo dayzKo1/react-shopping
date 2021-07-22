@@ -18,48 +18,53 @@ export default class ProductsList extends React.Component {
       type: "products/query",
     });
   }
+  changeSize = (size) => {
+    const { dispatch, state_sort } = this.props;
+    dispatch({
+      type: "products/sort",
+      payload: {
+        size: size,
+        sort: state_sort,
+      }
+    })
+  };
+  changeSort = (sort) => {
+    const { dispatch, state_size } = this.props;
+    dispatch({
+      type: "products/sort",
+      payload: {
+        size: state_size,
+        sort: sort,
+      },
+    })
+  };
   render() {
-    const { products, state_size, state_sort, dispatch } = this.props;
-    const changeSize = (size) => {
-      dispatch({
-        type: "products/sort",
-        payload: {
-          size: size,
-          sort: state_sort,
-        }
-      })
-    };
-    const changeSort = (sort) => {
-      dispatch({
-        type: "products/sort",
-        payload: {
-          size: state_size,
-          sort: sort,
-        },
-      })
-    };
+
+    const { products, state_size } = this.props;
     const { sizeTotal } = this.state;
+
     const sizeList = sizeTotal.map((item, key) => (
       <Button
         size="middle"
-        onClick={() => changeSize(item)}
-        style={{ marginRight: 5, color: 'white', backgroundColor: 'red', borderColor: 'red' }}
+        onClick={() => this.changeSize(item)}
+        style={{ marginRight: 5, color: 'white', backgroundColor: 'red', borderColor: 'red',fontFamily: "Arial" ,fontWeight:500}}
         shape={state_size === item ? "round" : "circle"}
         key={key}
       >
         {item}
       </Button>
     ));
+
     return (
       <div>
         <Affix>
           <Row justify="center" align="bottom" style={{ backgroundColor: '#001529', color: 'white', padding: 10 }}>
             <Col style={{ marginRight: 30 }}>
-              <span style={{ fontWeight: 600, fontSize: 20 }}>Order:</span>
+              <span style={{ fontWeight: 600, fontSize: 20 ,fontFamily: "Arial" }}>Order:</span>
               <Select
                 bordered={false}
                 defaultValue="default"
-                onChange={(value) => changeSort(value)}
+                onChange={(value) => this.changeSort(value)}
                 loading="false"
                 style={{ color: 'white', fontWeight: 400, fontSize: 17 }}
               >
@@ -74,7 +79,7 @@ export default class ProductsList extends React.Component {
             </Col>
             <Col>
               <span style={{ fontSize: 20, color: 'red' }}>{products?.length}</span>
-              <span style={{ fontWeight: 600, fontSize: 20 }}> Product(s) Found</span></Col>
+              <span style={{ fontWeight: 600, fontSize: 20,fontFamily: "Arial"  }}> Product(s) Found</span></Col>
           </Row>
         </Affix>
         <Row justify="center">

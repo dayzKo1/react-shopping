@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from "dva";
 import { Button, List } from "antd";
+import { createFromIconfontCN } from "@ant-design/icons";
+const IconFont = createFromIconfontCN({
+  scriptUrl: [
+    "//at.alicdn.com/t/font_2677016_exz15j3jnxg.js",
+  ],
+});
 @connect(({ shoppingCart, loading }) => ({
   products: shoppingCart.cart_total_goods.map(({ id, size }) => {
     return {
@@ -21,77 +27,85 @@ import { Button, List } from "antd";
   checkingOut: loading.effects["shoppingCart/checkout"],
 }))
 export default class ShoppingCart extends React.Component {
+
+  checkOut = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/checkout",
+    });
+  };
+  addToCart = (id, size) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/addToCart",
+      payload: {
+        id: id,
+        size: size
+      },
+    });
+  };
+  minusOne = (id, size) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/minusOne",
+      payload: {
+        id,
+        size,
+      },
+    });
+  };
+  removeProduct = (id, size, goods_number) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "shoppingCart/removeProduct",
+      payload: {
+        id,
+        size,
+        goods_number,
+      },
+    });
+  };
   render() {
-    const { products, subtotal, checkingOut, dispatch } = this.props;
-    const checkOut = () => {
-      dispatch({
-        type: "shoppingCart/checkout",
-      });
-    };
-    const addToCart = (id, size) => {
-      dispatch({
-        type: "shoppingCart/addToCart",
-        payload: {
-          id:id,
-          size:size
-        },
-      });
-    };
-    const minusOne = (id, size) => {
-      dispatch({
-        type: "shoppingCart/minusOne",
-        payload: {
-          id,
-          size,
-        },
-      });
-    };
-    const removeProduct = (id, size, goods_number) => {
-      dispatch({
-        type: "shoppingCart/removeProduct",
-        payload: {
-          id,
-          size,
-          goods_number,
-        },
-      });
-    };
+    const { products, subtotal, checkingOut
+
+    } = this.props;
+
     return (
       <div>
         <div>
           <List
             itemLayout="horizontal"
-            pagination={{ defaultPageSize: "5" }}
+            pagination={{ defaultPageSize: "4" }}
             dataSource={products}
             renderItem={(item) => (
               <List.Item
                 actions={[
-                  <Button.Group>
+                  <Button.Group style={{ marginTop: 115 }}>
                     <Button
-                      style={{ marginRight: 10, verticalAlign: 'middle', width: 24 }}
+                      style={{ marginRight: 10, verticalAlign: 'middle' }}
                       size="small"
-                      onClick={() => minusOne(item.id, item.size)}
+                      onClick={() => this.minusOne(item.id, item.size)}
                       type="primary"
                       disabled={item.goods_number === 1}
                     >
-                      -
+                      <IconFont style={{ fontSize: 10,color:'white' }} type="icon-jiajianchengchu-1" />
                     </Button>
                     <Button
-                      style={{ marginRight: 10, verticalAlign: 'middle', width: 25 }}
+                      style={{ marginRight: 10, verticalAlign: 'middle' }}
                       size="small"
-                      onClick={() => addToCart(item.id, item.size)}
+                      onClick={() => this.addToCart(item.id, item.size)}
                       type="primary"
                     >
-                      +
+                      <IconFont style={{ fontSize: 10,color:'white'}} type="icon-jiajianchengchu-2" />
                     </Button>
                     <Button
                       style={{ verticalAlign: 'middle' }}
                       size="small"
-                      onClick={() => removeProduct(item.id, item.size, item.goods_number)
+                      onClick={() => this.removeProduct(item.id, item.size, item.goods_number)
                       }
                       type="danger"
                     >
-                      X
+                      <IconFont style={{ fontSize: 10,color:'white'}} type="icon-jiajianchengchu-3" />
                     </Button>
                   </Button.Group>
                 ]}
@@ -99,18 +113,32 @@ export default class ShoppingCart extends React.Component {
                 <List.Item.Meta
                   avatar={
                     <img
-                      style={{ height: 80 }}
+                      style={{ height: 140, backgroundColor: "#f8f8f8", padding: 1 }}
                       src={"./assets/products_img/" + item.sku + "_2.jpg"}
                       alt={item.title + "_2.jpg"}
                     />
                   }
-                  title={item.title}
-                  description={
-                    item.size + '|$' +
-                    item.price.toFixed(2)
+                  title={<div style={{ fontSize: 15 }}>{item.title}</div>}
+                  description=
+                  {
+                    <div style={{ fontSize: 17 }}>
+
+                      {item.size + '|$' +
+                        item.price.toFixed(2)
+                      }
+
+                      <div>
+                        NUM:<span style={{ color: 'red',fontWeight:600 }}>{
+                          item.goods_number}</span>
+                      </div>
+
+                    </div>
+
                   }
                 />
-                <div>Num: {item.goods_number}</div>
+
+                {/* <div style={{ marginTop: 50 }}>Num: {}</div> */}
+
               </List.Item>
             )}
           />
@@ -118,7 +146,7 @@ export default class ShoppingCart extends React.Component {
         <div>
           <h3 style={{ textAlign: "center" }}>Subtotal:${subtotal}</h3>
           <Button
-            onClick={checkOut}
+            onClick={this.checkOut}
             disabled={subtotal <= 0.0 || checkingOut}
             size="large"
             block

@@ -39,9 +39,9 @@ export default class ProductCard extends React.Component {
             ></img>
           }
         >
-          <h2 style={{ textAlign: "center" }}>{item.title}</h2>
+          <h2 style={{ textAlign: "center",fontFamily: "Arial" }}>{item.title}</h2>
           <Divider />
-          <h3 style={{ textAlign: "center" }}>
+          <h3 style={{ textAlign: "center" ,fontSize:25,fontFamily: "Arial"}}>
             {item.currencyFormat} {item.price.toFixed(2)}
           </h3>
           <Popover
@@ -53,10 +53,10 @@ export default class ProductCard extends React.Component {
                   <List.Item >
                     <Button
                       size="middle"
-                      style={{ width: '100%' }}
+                      style={{ width: '100%' ,fontFamily: "Arial"  }}
                       onClick={() => addToCart(item.id, item_size)}
                     >
-                      <span style={{ fontWeight: 700 }}>{item_size}</span>
+                      <span style={{ fontWeight:800, fontFamily: "Arial"}}>{item_size}</span>
                     </Button>
                   </List.Item>
                 )}

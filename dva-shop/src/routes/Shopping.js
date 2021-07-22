@@ -7,7 +7,7 @@ import { createFromIconfontCN } from "@ant-design/icons";
 const { Header, Content, Footer } = Layout;
 const IconFont = createFromIconfontCN({
   scriptUrl: [
-    "//at.alicdn.com/t/font_2677016_nho7t8375v.js",
+    "//at.alicdn.com/t/font_2677016_exz15j3jnxg.js",
   ],
 });
 @connect(({ shoppingCart }) => ({
@@ -42,7 +42,7 @@ export default class Shopping extends React.Component {
               <Col span={8}>
                 <IconFont style={{ fontSize: 50, verticalAlign: 'middle' }} type="icon-store" />
               </Col>
-              <Col span={8} style={{ color: 'white', fontWeight: 600, fontSize: 20 }}>
+              <Col span={8} style={{ color: 'white', fontWeight: 600, fontSize: 20,fontFamily: "Arial"  }}>
                 D.V.A
               </Col>
               <Col span={8}>
@@ -74,7 +74,7 @@ export default class Shopping extends React.Component {
 
         <Drawer
           title="DVA购物车"
-          width="400"
+          width="390"
           onClose={this.closeDrawer}
           visible={this.state.visible}
         >
